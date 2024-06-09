@@ -11,3 +11,11 @@ export interface user {
   name: string;
   email: string;
 }
+
+export interface accessTokenResponse {
+  statusCode: number;
+  body: {
+    accessToken: string;
+  };
+  error?: string;
+}
