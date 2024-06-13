@@ -1,11 +1,12 @@
-from flask_cors import CORS
 from flask import Flask, Blueprint, request, jsonify, current_app
-from app.bd import users_collection 
+from flask_cors import CORS
 from passlib.hash import pbkdf2_sha256
 import jwt
 import secrets
 from datetime import datetime, timedelta, timezone
 from bson import ObjectId
+from functools import wraps
+from app.bd import users_collection  # Asegúrate de que este import sea correcto para tu estructura de proyecto
 
 # Configuración
 SECRET_KEY = "your_secret_key"
@@ -18,6 +19,49 @@ CORS(app, resources={r"/*": {"origins": "http://localhost:5173"}})
 
 # Configuración de Flask
 app.config['SECRET_KEY'] = SECRET_KEY
+
+# Función para obtener el token del encabezado
+def get_token_from_header(headers):
+    if headers and 'authorization' in headers:
+        parted = headers['authorization'].split(" ")
+        if len(parted) == 2:
+            return parted[1]
+        else:
+            return None
+    return None
+
+# Funciones para verificar los tokens
+def verify_access_token(token):
+    try:
+        return jwt.decode(token, current_app.config['SECRET_KEY'], algorithms=[ALGORITHM])
+    except jwt.ExpiredSignatureError:
+        return None
+    except jwt.InvalidTokenError:
+        return None
+
+def verify_refresh_token(token):
+    try:
+        return jwt.decode(token, current_app.config['SECRET_KEY'], algorithms=[ALGORITHM])
+    except jwt.ExpiredSignatureError:
+        return None
+    except jwt.InvalidTokenError:
+        return None
+
+# Decorador para autenticar la solicitud
+def authenticate(f):
+    @wraps(f)
+    def decorated_function(*args, **kwargs):
+        token = get_token_from_header(request.headers)
+        if token:
+            decoded = verify_access_token(token)
+            if decoded:
+                request.user = decoded['user_id']
+            else:
+                return jsonify({"message": "Invalid or expired token"}), 401
+        else:
+            return jsonify({"message": "No token provided"}), 402
+        return f(*args, **kwargs)
+    return decorated_function
 
 # Función de generación de tokens
 def generate_tokens(user_id):
@@ -91,50 +135,33 @@ def login():
 # Ruta para refrescar el access token
 @app.route('/refresh', methods=['POST'])
 def refresh():
-    refreshToken = request.json.get('refreshToken')
+    refresh_token = get_token_from_header(request.headers)
+    if refresh_token:
+        print("entra a refresh_token")
+        payload = verify_refresh_token(refresh_token)
+        if payload and payload.get("type") == "refresh":
+            user_id = payload['user_id']
+            accessToken, refreshToken = generate_tokens(user_id)
+            return jsonify({'body':{'accessToken': accessToken}}), 200
+        else:
+            return jsonify({'message': 'Invalid refresh token'}), 401
+    else:
+        return jsonify({'message': 'Refresh token not provided'}), 401
 
-    try:
-        payload = jwt.decode(refreshToken, current_app.config['SECRET_KEY'], algorithms=[ALGORITHM])
-        if payload.get("type") != "refresh":
-            return jsonify({'message': 'Invalid token type'}), 401
-        user_id = payload.get('user_id')
-        if not user_id:
-            return jsonify({'message': 'Invalid token'}), 401
-        accessToken = generate_access_token(user_id, expires_delta=timedelta(minutes=ACCESS_TOKEN_EXPIRE_MINUTES))
-        return jsonify({'accessToken': accessToken})
-    except jwt.ExpiredSignatureError:
-        return jsonify({'message': 'Refresh token expired'}), 401
-    except jwt.InvalidTokenError:
-        return jsonify({'message': 'Invalid refresh token'}), 401
-    
 # Ruta para obtener información del usuario
 @app.route('/user', methods=['GET'])
-def get_user_info():
-    auth_header = request.headers.get('Authorization')
-    if auth_header is None:
-        return jsonify({'message': 'Missing authorization header'}), 401
-    
-    try:
-        token = auth_header.split(" ")[1]
-        payload = jwt.decode(token, current_app.config['SECRET_KEY'], algorithms=[ALGORITHM])
-        user_id = payload.get('user_id')
-        if not user_id:
-            return jsonify({'message': 'Invalid token'}), 401
-
-        user = users_collection.find_one({'_id': ObjectId(user_id)})
-        if user is None:
-            return jsonify({'message': 'User not found'}), 404
-        
-        user_info = {
-            'id': str(user['_id']),
-            'name': user['name'],
-            'email': user['email']
-        }
-        return jsonify(user_info)
-    except jwt.ExpiredSignatureError:
-        return jsonify({'message': 'Token expired'}), 401
-    except jwt.InvalidTokenError:
-        return jsonify({'message': 'Invalid token'}), 401
+@authenticate
+def get_user():
+    print("entra a get_user")
+    print("hola")
+    user_id = request.user
+    user = users_collection.find_one({'_id': ObjectId(user_id)}, {'password': 0})  # Excluir la contraseña de la respuesta
+    if user:
+        # Convertir ObjectId a cadena
+        user['_id'] = str(user['_id'])
+        return jsonify(user), 200
+    else:
+        return jsonify({'message': 'User not found'}), 404
 
 if __name__ == "__main__":
     app.run(debug=True)

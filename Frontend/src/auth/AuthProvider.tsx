@@ -32,14 +32,12 @@ export function AuthProvider({ children }: AuthProviderProps) {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
-          autorization: `Bearer ${refreshToken}`,
+          authorization: `Bearer ${refreshToken}`,
         },
       });
 
       if (response.ok) {
-        console.log("responde OK");
         const json = (await response.json()) as accessTokenResponse;
-
         if (json.error) {
           throw new Error(json.error);
         }
@@ -59,12 +57,11 @@ export function AuthProvider({ children }: AuthProviderProps) {
         method: "GET",
         headers: {
           "Content-Type": "application/json",
-          autorization: `Bearer ${accessToken}`,
+          authorization: `Bearer ${accessToken}`,
         },
       });
 
       if (response.ok) {
-        console.log("responde OK");
         const json = await response.json();
 
         if (json.error) {
