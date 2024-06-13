@@ -106,6 +106,35 @@ def refresh():
         return jsonify({'message': 'Refresh token expired'}), 401
     except jwt.InvalidTokenError:
         return jsonify({'message': 'Invalid refresh token'}), 401
+    
+# Ruta para obtener información del usuario
+@app.route('/user', methods=['GET'])
+def get_user_info():
+    auth_header = request.headers.get('Authorization')
+    if auth_header is None:
+        return jsonify({'message': 'Missing authorization header'}), 401
+    
+    try:
+        token = auth_header.split(" ")[1]
+        payload = jwt.decode(token, current_app.config['SECRET_KEY'], algorithms=[ALGORITHM])
+        user_id = payload.get('user_id')
+        if not user_id:
+            return jsonify({'message': 'Invalid token'}), 401
+
+        user = users_collection.find_one({'_id': ObjectId(user_id)})
+        if user is None:
+            return jsonify({'message': 'User not found'}), 404
+        
+        user_info = {
+            'id': str(user['_id']),
+            'name': user['name'],
+            'email': user['email']
+        }
+        return jsonify(user_info)
+    except jwt.ExpiredSignatureError:
+        return jsonify({'message': 'Token expired'}), 401
+    except jwt.InvalidTokenError:
+        return jsonify({'message': 'Invalid token'}), 401
 
 if __name__ == "__main__":
     app.run(debug=True)

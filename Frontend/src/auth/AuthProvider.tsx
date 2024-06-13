@@ -13,6 +13,7 @@ const AuthContext = createContext({
   getAccessToken: () => {},
   saveUser: (_userData: AuthResponse) => {},
   getRefreshToken: () => {},
+  // getUser: () => ({} as user | undefined),
 });
 
 export function AuthProvider({ children }: AuthProviderProps) {
@@ -21,11 +22,13 @@ export function AuthProvider({ children }: AuthProviderProps) {
   const [user, setUser] = useState<user>();
   // const [refreshToken, setRefreshToken] = useState<string>("");
 
-  useEffect(() => {}, []);
+  useEffect(() => {
+    checkAuth();
+  }, []);
 
   async function requestNewAccessToken(refreshToken: string) {
     try {
-      const response = await fetch("http://127.0.0.1:5000/refresh-token", {
+      const response = await fetch("http://127.0.0.1:5000/refresh", {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
@@ -34,6 +37,7 @@ export function AuthProvider({ children }: AuthProviderProps) {
       });
 
       if (response.ok) {
+        console.log("responde OK");
         const json = (await response.json()) as accessTokenResponse;
 
         if (json.error) {
@@ -60,6 +64,7 @@ export function AuthProvider({ children }: AuthProviderProps) {
       });
 
       if (response.ok) {
+        console.log("responde OK");
         const json = await response.json();
 
         if (json.error) {
@@ -108,10 +113,10 @@ export function AuthProvider({ children }: AuthProviderProps) {
   }
 
   function getRefreshToken(): string | null {
-    const token = localStorage.getItem("token");
-    if (token) {
-      const { refreshToken } = JSON.parse(token);
-      return refreshToken;
+    const tokenData = localStorage.getItem("token");
+    if (tokenData) {
+      const token = JSON.parse(tokenData);
+      return token;
     }
     return null;
   }
