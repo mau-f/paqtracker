@@ -9,6 +9,7 @@ client = MongoClient('mongodb+srv://mauricioignacio:umPr4FqMLIKbdlcn@cluster0.1v
 
 db = client['paqtracker']
 users_collection = db['users']
+visitas_collection = db['visitas']
 
 # users_collection.insert_one({"nombre": "Juan", "contraseña":"hola" })
 

@@ -13,6 +13,7 @@ const AuthContext = createContext({
   getAccessToken: () => {},
   saveUser: (_userData: AuthResponse) => {},
   getRefreshToken: () => {},
+  signOut: () => {},
   // getUser: () => ({} as user | undefined),
 });
 
@@ -20,7 +21,7 @@ export function AuthProvider({ children }: AuthProviderProps) {
   const [isAuthenticated, setIsAutenticated] = useState(false);
   const [accessToken, setAccessToken] = useState<string>("");
   const [user, setUser] = useState<user>();
-  // const [refreshToken, setRefreshToken] = useState<string>("");
+  const [isLoading, setIsLoading] = useState(true);
 
   useEffect(() => {
     checkAuth();
@@ -79,6 +80,12 @@ export function AuthProvider({ children }: AuthProviderProps) {
 
   async function checkAuth() {
     if (accessToken) {
+      const userInfo = await getUserInfo(accessToken);
+      if (userInfo) {
+        saveSessionInfo(userInfo, accessToken, getRefreshToken()!);
+        setIsLoading(false);
+        return;
+      }
     } else {
       const token = getRefreshToken();
       if (token) {
@@ -87,10 +94,20 @@ export function AuthProvider({ children }: AuthProviderProps) {
           const userInfo = await getUserInfo(newAccessToken);
           if (userInfo) {
             saveSessionInfo(userInfo, newAccessToken, token);
+            setIsLoading(false);
+            return;
           }
         }
       }
     }
+    setIsLoading(false);
+  }
+
+  function signOut() {
+    setIsAutenticated(false);
+    setAccessToken("");
+    setUser(undefined);
+    localStorage.removeItem("token");
   }
 
   function saveSessionInfo(
@@ -127,9 +144,15 @@ export function AuthProvider({ children }: AuthProviderProps) {
 
   return (
     <AuthContext.Provider
-      value={{ isAuthenticated, getAccessToken, saveUser, getRefreshToken }}
+      value={{
+        isAuthenticated,
+        getAccessToken,
+        saveUser,
+        getRefreshToken,
+        signOut,
+      }}
     >
-      {children}
+      {isLoading ? <div>LOading...</div> : children}
     </AuthContext.Provider>
   );
 }

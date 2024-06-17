@@ -5,7 +5,7 @@ import AddNotification from "./AddNotification";
 import AddResident from "./AddResident";
 
 const AddSection: React.FC = () => {
-  const [activeTab, setActiveTab] = useState("Tab 4");
+  const [activeTab, setActiveTab] = useState("Tab 1");
 
   const handleTabClick = (tab: string) => {
     setActiveTab(tab);

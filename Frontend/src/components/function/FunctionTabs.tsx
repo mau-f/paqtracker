@@ -5,7 +5,7 @@ import AddSection from "./AddSection";
 import ResidentRegistration from "./ResidentRegistration";
 
 const FunctionTabs: React.FC = () => {
-  const [activeTab, setActiveTab] = useState("Tab 3");
+  const [activeTab, setActiveTab] = useState("Tab 1");
 
   const handleTabClick = (tab: string) => {
     setActiveTab(tab);

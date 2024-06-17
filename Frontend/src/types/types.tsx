@@ -19,3 +19,15 @@ export interface accessTokenResponse {
   };
   error?: string;
 }
+
+export interface Visita {
+  _id: string;
+  nombre: string;
+  fecha: string;
+  tipo: string;
+  fechaIgreso: string;
+  rut: string;
+  validoHasta: string;
+  estacionamiento: string;
+  // Agrega otros campos que sean necesarios
+}

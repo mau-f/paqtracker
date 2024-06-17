@@ -1,7 +1,17 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import FormBlock from "./FormBlock";
+import { Visita } from "../../types/types";
 
 const VisitRegistration: React.FC = () => {
+  const [visitas, setVisitas] = useState<Visita[]>([]);
+
+  useEffect(() => {
+    fetch("http://127.0.0.1:5000/visitas")
+      .then((response) => response.json())
+      .then((data) => setVisitas(data))
+      .catch((error) => console.error("Error fetching visitas:", error));
+  }, []);
+
   return (
     <div>
       <div className="div-block-5">
@@ -25,12 +35,24 @@ const VisitRegistration: React.FC = () => {
         <h5 className="category-list">Estacionamiento</h5>
       </div>
       <ul role="list" className="list">
-        <li className="list-item"></li>
-        <li className="list-item"></li>
-        <li className="list-item"></li>
+        {visitas.map((visita) => (
+          <li className="list-item" key={visita._id}>
+            <div className="div-block-7">
+              <div className="item-list">{visita.nombre}</div>
+              <div>{visita.tipo}</div>
+              <div>{visita.fechaIgreso}</div>
+              <div>{visita.rut}</div>
+              <div>{visita.validoHasta}</div>
+              <div>{visita.estacionamiento}</div>
+            </div>
+          </li>
+        ))}
       </ul>
     </div>
   );
 };
 
 export default VisitRegistration;
+
+// {visita.nombre} - {visita.tipo} - {visita.fechaIgreso} -{" "}
+// {visita.rut} - {visita.validoHasta} - {visita.estacionamiento}

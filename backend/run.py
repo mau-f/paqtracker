@@ -6,7 +6,10 @@ import secrets
 from datetime import datetime, timedelta, timezone
 from bson import ObjectId
 from functools import wraps
-from app.bd import users_collection  # Asegúrate de que este import sea correcto para tu estructura de proyecto
+from pymongo import MongoClient
+from app.bd import users_collection, visitas_collection
+
+from visitas_routes import visitas_bp
 
 # Configuración
 SECRET_KEY = "your_secret_key"
@@ -19,6 +22,11 @@ CORS(app, resources={r"/*": {"origins": "http://localhost:5173"}})
 
 # Configuración de Flask
 app.config['SECRET_KEY'] = SECRET_KEY
+
+# Conexión a la base de datos
+client = MongoClient('mongodb://localhost:27017/')
+db = client.mydatabase
+tokens = db.tokens
 
 # Función para obtener el token del encabezado
 def get_token_from_header(headers):
@@ -137,7 +145,6 @@ def login():
 def refresh():
     refresh_token = get_token_from_header(request.headers)
     if refresh_token:
-        print("entra a refresh_token")
         payload = verify_refresh_token(refresh_token)
         if payload and payload.get("type") == "refresh":
             user_id = payload['user_id']
@@ -152,8 +159,6 @@ def refresh():
 @app.route('/user', methods=['GET'])
 @authenticate
 def get_user():
-    print("entra a get_user")
-    print("hola")
     user_id = request.user
     user = users_collection.find_one({'_id': ObjectId(user_id)}, {'password': 0})  # Excluir la contraseña de la respuesta
     if user:
@@ -162,6 +167,32 @@ def get_user():
         return jsonify(user), 200
     else:
         return jsonify({'message': 'User not found'}), 404
+
+# Ruta para eliminar el token (signout)
+@app.route('/signout', methods=['DELETE'])
+async def delete_token():
+    try:
+        refresh_token = get_token_from_header(request.headers)
+        if refresh_token:
+            print("delete token")
+            result = tokens.delete_one({'token': refresh_token})
+            if result.deleted_count > 0:
+                return jsonify({'message': 'delete token'}), 204
+        return jsonify({'message': 'token not found'}), 404
+    except Exception as e:
+        print(e)
+        return jsonify({'message': 'server error'}), 500
+
+# @app.route('/visitas', methods=['GET'])
+# def obtener_visitas():
+#     visitas = visitas_collection.find()
+#     resultado = []
+#     for visita in visitas:
+#         visita['_id'] = str(visita['_id'])  # Convertir ObjectId a string
+#         resultado.append(visita)
+#     return jsonify(resultado)
+
+app.register_blueprint(visitas_bp)
 
 if __name__ == "__main__":
     app.run(debug=True)

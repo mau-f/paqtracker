@@ -3356,4 +3356,11 @@ textarea.w-select {
     align-items: center;
     display: flex;
   }
+
+  .item-list {
+    padding-top: 50px;
+    padding-left: 50px;
+    font-size: 14px;
+    line-height: 20px;
+  }
 }

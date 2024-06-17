@@ -1,6 +1,27 @@
-import React from "react";
+import { Link } from "react-router-dom";
+import React, { MouseEvent } from "react";
+import { useAuth } from "../../auth/AuthProvider";
 
 const Navbar2: React.FC = () => {
+  const auth = useAuth();
+  async function handleSingOut(e: React.MouseEvent<HTMLAnchorElement>) {
+    e.preventDefault();
+
+    try {
+      const response = await fetch("http://127.0.0.1:5000/signout", {
+        method: "DELETE",
+        headers: {
+          "content-type": "application/json",
+          Authorization: `Bearer ${auth.getRefreshToken()}`,
+        },
+      });
+      if (response.ok) {
+        console.log("Cierre de sesión exitoso");
+        auth.signOut();
+      }
+    } catch (error) {}
+  }
+
   return (
     <div className="div-navbar">
       <div className="navbar w-nav">
@@ -20,8 +41,8 @@ const Navbar2: React.FC = () => {
           <a href="#" className="w-nav-link">
             Help
           </a>
-          <a href="#" className="w-nav-link">
-            Profile
+          <a href="#" className="w-nav-link" onClick={handleSingOut}>
+            Sing out
           </a>
         </nav>
         <div className="menu-button w-nav-button">
