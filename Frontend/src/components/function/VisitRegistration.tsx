@@ -38,12 +38,12 @@ const VisitRegistration: React.FC = () => {
         {visitas.map((visita) => (
           <li className="list-item" key={visita._id}>
             <div className="div-block-7">
-              <div className="item-list">{visita.nombre}</div>
-              <div>{visita.tipo}</div>
-              <div>{visita.fechaIgreso}</div>
+              <div className="item-list">{visita.name}</div>
+              <div>{visita.frequent}</div>
+              <div>{visita.fecha}</div>
               <div>{visita.rut}</div>
               <div>{visita.validoHasta}</div>
-              <div>{visita.estacionamiento}</div>
+              <div>{visita.parking}</div>
             </div>
           </li>
         ))}

@@ -1,7 +1,16 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import FormBlock from "./FormBlock";
+import { Package } from "../../types/types";
 
 const PackageRegistration: React.FC = () => {
+  const [packages, setPackage] = useState<Package[]>([]);
+
+  useEffect(() => {
+    fetch("http://127.0.0.1:5000/packages")
+      .then((response) => response.json())
+      .then((data) => setPackage(data))
+      .catch((error) => console.error("Error fetching visitas:", error));
+  }, []);
   return (
     <div>
       <div className="div-block-5">
@@ -27,9 +36,16 @@ const PackageRegistration: React.FC = () => {
         <h5 className="category-list">Destinatario</h5>
       </div>
       <ul role="list" className="list">
-        <li className="list-item"></li>
-        <li className="list-item"></li>
-        <li className="list-item"></li>
+        {packages.map((Package) => (
+          <li className="list-item" key={Package._id}>
+            <div className="div-block-7">
+              <div>{Package.name}</div>
+              <div>{Package.fecha}</div>
+              <div>{Package.depto}</div>
+              <div>{Package.destinatario}</div>
+            </div>
+          </li>
+        ))}
       </ul>
     </div>
   );

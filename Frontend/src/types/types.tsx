@@ -22,12 +22,30 @@ export interface accessTokenResponse {
 
 export interface Visita {
   _id: string;
-  nombre: string;
+  name: string;
   fecha: string;
-  tipo: string;
-  fechaIgreso: string;
+  frequent: string;
+  entry_time: string;
   rut: string;
   validoHasta: string;
-  estacionamiento: string;
+  parking: string;
+  // Agrega otros campos que sean necesarios
+}
+
+export interface Package {
+  _id: string;
+  name: string;
+  fecha: string;
+  depto: string;
+  destinatario: string;
+  // Agrega otros campos que sean necesarios
+}
+
+export interface resident {
+  _id: string;
+  name: string;
+  depto: string;
+  phone: string;
+  email: string;
   // Agrega otros campos que sean necesarios
 }
