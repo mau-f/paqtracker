@@ -12,6 +12,7 @@ users_collection = db['users']
 visitas_collection = db['visitas']
 package_colecction = db['paquetes']
 resident_colecction = db['residentes']
+refresh_tokens_collection = db['refresh_tokens']
 
 # users_collection.insert_one({"nombre": "Juan", "contraseña":"hola" })
 
