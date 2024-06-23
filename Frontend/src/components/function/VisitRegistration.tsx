@@ -34,20 +34,22 @@ const VisitRegistration: React.FC = () => {
         <h5 className="category-list">Valido hasta</h5>
         <h5 className="category-list">Estacionamiento</h5>
       </div>
-      <ul role="list" className="list">
-        {visitas.map((visita) => (
-          <li className="list-item" key={visita._id}>
-            <div className="div-block-7">
-              <div className="item-list">{visita.name}</div>
-              <div>{visita.frequent}</div>
-              <div>{visita.fecha}</div>
-              <div>{visita.rut}</div>
-              <div>{visita.validoHasta}</div>
-              <div>{visita.parking}</div>
-            </div>
-          </li>
-        ))}
-      </ul>
+      <div className="scroll-container">
+        <ul role="list" className="list">
+          {[...visitas].reverse().map((visita) => (
+            <li className="list-item" key={visita._id}>
+              <div className="div-block-7">
+                <div className="item-list">{visita.name}</div>
+                <div className="item-list">{visita.frequent}</div>
+                <div className="item-list">{visita.fecha}</div>
+                <div className="item-list">{visita.rut}</div>
+                <div className="item-list">{visita.validoHasta}</div>
+                <div className="item-list">{visita.parking}</div>
+              </div>
+            </li>
+          ))}
+        </ul>
+      </div>
     </div>
   );
 };

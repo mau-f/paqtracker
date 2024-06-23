@@ -14,8 +14,8 @@ const Navbar: React.FC = () => {
           </a>
         </div>
         <nav className="nav-menu w-nav-menu">
-          <a href="/function" className="w-nav-link">
-            Entrar
+          <a href="#create-account" className="w-nav-link">
+            crear cuenta
           </a>
           <a href="#question" className="w-nav-link">
             Questions

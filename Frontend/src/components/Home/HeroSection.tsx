@@ -47,7 +47,7 @@ const HeroSection: React.FC = () => {
   };
 
   return (
-    <section className="hero">
+    <section className="hero" id="hero">
       <div className="container-in">
         <h1 className="heading">Seguridad Residencial</h1>
         <h3 className="heading-2">

@@ -35,9 +35,6 @@ const Navbar2: React.FC = () => {
           </a>
         </div>
         <nav className="nav-menu w-nav-menu">
-          <a href="/" className="w-nav-link">
-            Volver
-          </a>
           <a href="#" className="w-nav-link">
             Help
           </a>

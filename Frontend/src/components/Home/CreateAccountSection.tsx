@@ -20,16 +20,23 @@ const CreateAccountSection: React.FC = () => {
 
     if (response.ok) {
       console.log("Registro exitoso");
+      setMessage("Registro exitoso");
+      setName("");
+      setEmail("");
+      setPassword("");
+      window.location.hash = "#hero";
     } else {
       console.error("Error al registrarse");
     }
   };
 
   return (
-    <section className="create-account">
+    <section id="create-account" className="create-account">
       <div className="contact-container">
-        <h2 className="heading-4">te gustaría recibir mas información?</h2>
-        <p className="paragraph">déjanos tu email y te contactaremos</p>
+        <h2 className="heading-4">
+          te gustaría unirte a la comunidad Traqpacker?
+        </h2>
+        <p className="paragraph">crea una cuenta ya!!!!</p>
         <div className="w-form">
           <form id="email-form" name="email-form" onSubmit={handleSignup}>
             <label htmlFor="name">Name</label>
@@ -66,7 +73,7 @@ const CreateAccountSection: React.FC = () => {
             />
             <input type="submit" className="button w-button" value="Submit" />
           </form>
-          {message && <p>{message}</p>}
+          {message && <p className="messageType">{message}</p>}
           <div className="w-form-done">
             <div>Thank you! Your submission has been received!</div>
           </div>

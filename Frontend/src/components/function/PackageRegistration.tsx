@@ -35,18 +35,20 @@ const PackageRegistration: React.FC = () => {
         <h5 className="category-list">Fecha ingreso</h5>
         <h5 className="category-list">Destinatario</h5>
       </div>
-      <ul role="list" className="list">
-        {packages.map((Package) => (
-          <li className="list-item" key={Package._id}>
-            <div className="div-block-7">
-              <div>{Package.name}</div>
-              <div>{Package.fecha}</div>
-              <div>{Package.depto}</div>
-              <div>{Package.destinatario}</div>
-            </div>
-          </li>
-        ))}
-      </ul>
+      <div className="scroll-container">
+        <ul role="list" className="list">
+          {packages.map((Package) => (
+            <li className="list-item" key={Package._id}>
+              <div className="div-block-7">
+                <div className="item-list">{Package.name}</div>
+                <div className="item-list">{Package.fecha}</div>
+                <div className="item-list">{Package.depto}</div>
+                <div className="item-list">{Package.destinatario}</div>
+              </div>
+            </li>
+          ))}
+        </ul>
+      </div>
     </div>
   );
 };

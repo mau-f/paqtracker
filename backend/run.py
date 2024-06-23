@@ -16,10 +16,10 @@ app = Flask(__name__)
 CORS(app, resources={r"/*": {"origins": "http://localhost:5173"}})
 app.config['SECRET_KEY'] = SECRET_KEY
 
-# Conexión a la base de datos
-client = MongoClient('mongodb://localhost:27017/')
-db = client.mydatabase
-tokens = db.tokens
+# # Conexión a la base de datos
+# client = MongoClient('mongodb://localhost:27017/')
+# db = client.mydatabase
+# tokens = db.tokens
 
 
 # Registrar los Blueprints

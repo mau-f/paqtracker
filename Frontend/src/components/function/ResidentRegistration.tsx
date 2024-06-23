@@ -36,18 +36,20 @@ const ResidentRegistration: React.FC = () => {
         <h5 className="category-list">N.º de teléfono</h5>
         <h5 className="category-list">Correo</h5>
       </div>
-      <ul role="list" className="list">
-        {residents.map((resident) => (
-          <li className="list-item" key={resident._id}>
-            <div className="div-block-7">
-              <div>{resident.name}</div>
-              <div>{resident.depto}</div>
-              <div>{resident.phone}</div>
-              <div>{resident.email}</div>
-            </div>
-          </li>
-        ))}
-      </ul>
+      <div className="scroll-container">
+        <ul role="list" className="list">
+          {residents.map((resident) => (
+            <li className="list-item" key={resident._id}>
+              <div className="div-block-7">
+                <div className="item-list">{resident.name}</div>
+                <div className="item-list">{resident.depto}</div>
+                <div className="item-list">{resident.phone}</div>
+                <div className="item-list">{resident.email}</div>
+              </div>
+            </li>
+          ))}
+        </ul>
+      </div>
     </div>
   );
 };
