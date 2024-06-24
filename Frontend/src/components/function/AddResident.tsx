@@ -54,16 +54,22 @@ const AddResident: React.FC = () => {
               </div>
               <div className="div-form-visit">
                 <label htmlFor="name-4">Departamento</label>
-                <input
+                <select
                   className="new-visit-form w-input"
                   name="name-3"
                   data-name="Name 3"
-                  placeholder=""
-                  type="text"
                   id="name-3"
                   value={depto}
                   onChange={(e) => setDepto(e.target.value)}
-                />
+                >
+                  <option value="no especificado">Select one...</option>
+                  <option value="404">404</option>
+                  <option value="405">405</option>
+                  <option value="406">406</option>
+                  <option value="407">407</option>
+                  <option value="408">408</option>
+                  <option value="409">409</option>
+                </select>
               </div>
             </div>
             <div className="div-block-13">

@@ -1,16 +1,16 @@
 import React from "react";
+import { useTranslation } from "react-i18next";
 
 const FunctionSection: React.FC = () => {
+  const { t } = useTranslation();
   return (
     <section id="Function" className="div-function">
       <div className="function">
         <div className="function-text">
-          <div className="context">Seguridad</div>
+          <div className="context">{t("Security")}</div>
           <h2 className="title-function">Registro de visitas</h2>
           <p className="function-description">
-            Permite a los residentes registrar a sus visitantes, proporcionando
-            información como el nombre del visitante, la fecha y hora de
-            llegada, facilitando la gestión de acceso al complejo.
+            {t("VisitorRegistrationDescription")}
           </p>
         </div>
         <div className="img-function">

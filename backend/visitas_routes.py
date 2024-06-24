@@ -36,7 +36,10 @@ def add_visit():
 
     result = visitas_collection.insert_one(visit)
     
+    
+
     if result.inserted_id:
+
         return jsonify({'message': 'Visit added successfully', 'visit_id': str(result.inserted_id)}), 201
     else:
         return jsonify({'message': 'Failed to add visit'}), 500

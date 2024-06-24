@@ -4,6 +4,12 @@ from datetime import datetime, timedelta, timezone
 
 resident_bp = Blueprint('resident_bp', __name__)
 
+def obtener_residente_por_depto(depto):
+    resident = resident_colecction.find_one({"depto": depto})
+    resident_phone = resident['phone']
+    return resident_phone
+ 
+
 @resident_bp.route('/residents', methods=['GET'])
 def obtener_package():
     residents = resident_colecction.find()
