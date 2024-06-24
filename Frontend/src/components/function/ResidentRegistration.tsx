@@ -2,8 +2,10 @@ import React, { useEffect, useState } from "react";
 
 import FormBlock from "./FormBlock";
 import { resident } from "../../types/types";
+import { useTranslation } from "react-i18next";
 
 const ResidentRegistration: React.FC = () => {
+  const { t } = useTranslation();
   const [residents, setPackage] = useState<resident[]>([]);
 
   useEffect(() => {
@@ -20,7 +22,7 @@ const ResidentRegistration: React.FC = () => {
           alt="Registro de residentes"
           className="image-11"
         />
-        <div className="text-block">Registro de residentes</div>
+        <div className="text-block">{t("ResidentRegistration")}</div>
       </div>
       <div className="div-block-6">
         <FormBlock
@@ -31,10 +33,10 @@ const ResidentRegistration: React.FC = () => {
         />
       </div>
       <div className="div-block-7">
-        <h5 className="category-list">Nombre</h5>
-        <h5 className="category-list">Departamento</h5>
-        <h5 className="category-list">N.º de teléfono</h5>
-        <h5 className="category-list">Correo</h5>
+        <h5 className="category-list">{t("Name")}</h5>
+        <h5 className="category-list">{t("Dep")}</h5>
+        <h5 className="category-list">{t("PhoneNumer")}</h5>
+        <h5 className="category-list">{t("Email")}</h5>
       </div>
       <div className="scroll-container">
         <ul role="list" className="list">

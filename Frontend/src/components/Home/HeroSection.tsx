@@ -2,9 +2,11 @@ import React, { useState } from "react";
 import { useAuth } from "../../auth/AuthProvider";
 import { Navigate } from "react-router-dom";
 import { AuthResponse } from "../../types/types";
+import { useTranslation } from "react-i18next";
 // import axios from 'axios';
 
 const HeroSection: React.FC = () => {
+  const { t } = useTranslation();
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   // const [token, setToken] = useState('');
@@ -49,9 +51,9 @@ const HeroSection: React.FC = () => {
   return (
     <section className="hero" id="hero">
       <div className="container-in">
-        <h1 className="heading">Seguridad Residencial</h1>
+        <h1 className="heading">{t("ResidentialSecurity")}</h1>
         <h3 className="heading-2">
-          Una herramienta esencial para residentes y personal de recepción
+          {t("ToolMes")}
         </h3>
         <div className="form-block-2 w-form">
           <form id="email-form-2" name="email-form-2" onSubmit={handleSubmit}>

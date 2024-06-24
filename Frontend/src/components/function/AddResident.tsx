@@ -1,6 +1,8 @@
 import React, { useState } from "react";
+import { useTranslation } from "react-i18next";
 
 const AddResident: React.FC = () => {
+  const { t } = useTranslation();
   const [name, setName] = useState("");
   const [depto, setDepto] = useState("");
   const [phone, setPhone] = useState("");
@@ -27,7 +29,7 @@ const AddResident: React.FC = () => {
 
   return (
     <div>
-      <div className="add-title">Nuevo Residente</div>
+      <div className="add-title">{t("NewRes")}</div>
       <div className="div-block-14">
         <div className="w-form">
           <form
@@ -40,7 +42,7 @@ const AddResident: React.FC = () => {
           >
             <div className="div-block-13">
               <div className="div-form-visit">
-                <label htmlFor="name">Nombre</label>
+                <label htmlFor="name">{t("Name")}</label>
                 <input
                   className="new-visit-form w-input"
                   name="name-3"
@@ -53,7 +55,7 @@ const AddResident: React.FC = () => {
                 />
               </div>
               <div className="div-form-visit">
-                <label htmlFor="name-4">Departamento</label>
+                <label htmlFor="name-4">{t("Departamento")}</label>
                 <select
                   className="new-visit-form w-input"
                   name="name-3"
@@ -74,7 +76,7 @@ const AddResident: React.FC = () => {
             </div>
             <div className="div-block-13">
               <div className="div-form-visit">
-                <label htmlFor="name-4">Número de teléfono</label>
+                <label htmlFor="name-4">{t("PhoneNumber")}</label>
                 <input
                   className="new-visit-form w-input"
                   name="name-3"
@@ -87,7 +89,7 @@ const AddResident: React.FC = () => {
                 />
               </div>
               <div className="div-form-visit">
-                <label htmlFor="name-4">Correo</label>
+                <label htmlFor="name-4">{t("Email")}</label>
                 <input
                   className="new-visit-form w-input"
                   name="name-3"
@@ -108,10 +110,10 @@ const AddResident: React.FC = () => {
             />
           </form>
           <div className="w-form-done">
-            <div>Thank you! Your submission has been received!</div>
+            <div>{t("SuccesM")}</div>
           </div>
           <div className="w-form-fail">
-            <div>Oops! Something went wrong while submitting the form.</div>
+            <div>{t("FailM")}</div>
           </div>
         </div>
       </div>

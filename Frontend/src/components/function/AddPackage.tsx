@@ -1,6 +1,8 @@
 import React, { useState } from "react";
+import { useTranslation } from "react-i18next";
 
 const AddPackage: React.FC = () => {
+  const { t } = useTranslation();
   const [name, setName] = useState("");
   const [fecha, setFecha] = useState("");
   const [depto, setDepto] = useState("");
@@ -27,7 +29,7 @@ const AddPackage: React.FC = () => {
 
   return (
     <div>
-      <div className="add-title">Nuevo paquete</div>
+      <div className="add-title">{t("NewPackage")}</div>
       <div className="div-form-add">
         <div className="w-form">
           <form
@@ -40,7 +42,7 @@ const AddPackage: React.FC = () => {
           >
             <div className="div-block-13">
               <div className="div-form-visit _1">
-                <label htmlFor="name-3">Nombre remitente</label>
+                <label htmlFor="name-3">{t("Remitter")}</label>
                 <input
                   className="new-visit-form w-input"
                   placeholder="holaaaa"
@@ -50,7 +52,7 @@ const AddPackage: React.FC = () => {
                 />
               </div>
               <div className="div-form-visit _1">
-                <label htmlFor="name-3">Fecha ingreso</label>
+                <label htmlFor="name-3">{t("AdmissionDate")}</label>
                 <input
                   type="date"
                   className="new-visit-form"
@@ -61,7 +63,7 @@ const AddPackage: React.FC = () => {
             </div>
             <div className="div-block-13">
               <div className="div-form-visit _1">
-                <label htmlFor="name-3">Departamento</label>
+                <label htmlFor="name-3">{t("Dep")}</label>
                 <input
                   className="new-visit-form w-input"
                   name="name-2"
@@ -74,7 +76,7 @@ const AddPackage: React.FC = () => {
                 />
               </div>
               <div className="div-form-visit _1">
-                <label htmlFor="name-3">Destinatario</label>
+                <label htmlFor="name-3">{t("Addressee")}</label>
                 <input
                   className="new-visit-form w-input"
                   name="name-2"
@@ -95,10 +97,10 @@ const AddPackage: React.FC = () => {
             />
           </form>
           <div className="w-form-done">
-            <div>Thank you! Your submission has been received!</div>
+            <div>{t("SuccesM")}</div>
           </div>
           <div className="w-form-fail">
-            <div>Oops! Something went wrong while submitting the form.</div>
+            <div>{t("FailM")}</div>
           </div>
         </div>
       </div>
