@@ -24,16 +24,16 @@ const Navbar: React.FC = () => {
           <button onClick={() => changeLanguage("en")}>English</button>
           <button onClick={() => changeLanguage("es")}>Español</button>
           <a href="#create-account" className="w-nav-link">
-            crear cuenta
+            {t("CreateAccount")}
           </a>
           <a href="#question" className="w-nav-link">
-            Questions
+          {t("Questions")}
           </a>
           <a href="#Function" className="w-nav-link">
-            Funciones
+          {t("Function")}
           </a>
           <a href="#About" className="w-nav-link">
-            Acerca de
+          {t("About")}
           </a>
         </nav>
         <div className="menu-button w-nav-button">

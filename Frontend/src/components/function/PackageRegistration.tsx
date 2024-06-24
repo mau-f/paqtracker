@@ -1,8 +1,10 @@
 import React, { useEffect, useState } from "react";
 import FormBlock from "./FormBlock";
 import { Package } from "../../types/types";
+import { useTranslation } from "react-i18next";
 
 const PackageRegistration: React.FC = () => {
+  const { t } = useTranslation();
   const [packages, setPackage] = useState<Package[]>([]);
 
   useEffect(() => {
@@ -19,7 +21,7 @@ const PackageRegistration: React.FC = () => {
           alt="Registro de paquetes"
           className="image-12"
         />
-        <h3 className="text-block">Registro de paquetes</h3>
+        <h3 className="text-block">{t("PackageRegistration")}</h3>
       </div>
       <div className="div-block-6">
         <FormBlock
@@ -30,10 +32,10 @@ const PackageRegistration: React.FC = () => {
         />
       </div>
       <div className="div-block-7">
-        <h5 className="category-list">Nombre remitente</h5>
-        <h5 className="category-list">Tipo</h5>
-        <h5 className="category-list">Fecha ingreso</h5>
-        <h5 className="category-list">Destinatario</h5>
+        <h5 className="category-list">{t("Remitter")}</h5>
+        <h5 className="category-list">{t("Type")}</h5>
+        <h5 className="category-list">{t("AdmissionDate")}</h5>
+        <h5 className="category-list">{t("Addressee")}</h5>
       </div>
       <div className="scroll-container">
         <ul role="list" className="list">

@@ -3,8 +3,10 @@ import AddVisit from "./AddVisit";
 import AddPackage from "./AddPackage";
 import AddNotification from "./AddNotification";
 import AddResident from "./AddResident";
+import { useTranslation } from "react-i18next";
 
 const AddSection: React.FC = () => {
+  const { t } = useTranslation();
   const [activeTab, setActiveTab] = useState("Tab 1");
 
   const handleTabClick = (tab: string) => {
@@ -15,7 +17,7 @@ const AddSection: React.FC = () => {
     <div>
       <div className="div-block-5">
         <img src="/images/8.png" alt="Agregar" className="image-11" />
-        <div className="text-block">Agregar</div>
+        <div className="text-block">{t("Add")}</div>
       </div>
       <div className="tabs-add w-tabs">
         <div className="tabs-menu-add w-tab-menu">

@@ -1,6 +1,8 @@
 import React, { useState } from "react";
+import { useTranslation } from "react-i18next";
 
 const AddVisit: React.FC = () => {
+  const { t } = useTranslation();
   const [name, setName] = useState("");
   const [fecha, setFecha] = useState("");
   const [rut, setRut] = useState("");
@@ -29,7 +31,7 @@ const AddVisit: React.FC = () => {
 
   return (
     <div>
-      <div className="add-title">Nueva visita</div>
+      <div className="add-title">{t("NewVis")}</div>
       <div className="div-form-add">
         <div className="w-form">
           <form
@@ -42,7 +44,7 @@ const AddVisit: React.FC = () => {
           >
             <div className="div-block-13">
               <div className="div-form-visit _1">
-                <label htmlFor="name-3">Nombre</label>
+                <label htmlFor="name-3">{t("Name")}</label>
                 <input
                   className="new-visit-form w-input"
                   name="name"
@@ -54,7 +56,7 @@ const AddVisit: React.FC = () => {
                 />
               </div>
               <div className="div-form-visit _1">
-                <label htmlFor="name-2">Fecha</label>
+                <label htmlFor="name-2">{t("Date")}</label>
                 <input
                   type="date"
                   className="new-visit-form"
@@ -65,7 +67,7 @@ const AddVisit: React.FC = () => {
             </div>
             <div className="div-block-13">
               <div className="div-form-visit _1">
-                <label htmlFor="name-3">Rut</label>
+                <label htmlFor="name-3">{t("DNI")}</label>
                 <input
                   className="new-visit-form w-input"
                   name="name-2"
@@ -78,7 +80,7 @@ const AddVisit: React.FC = () => {
                 />
               </div>
               <div className="div-form-visit _1">
-                <label htmlFor="name-3">Estacionamiento</label>
+                <label htmlFor="name-3">{t("Parking")}</label>
                 <input
                   className="new-visit-form w-input"
                   name="name-2"
@@ -93,7 +95,7 @@ const AddVisit: React.FC = () => {
             </div>
             <div className="div-block-13">
               <div className="div-form-visit _1">
-                <label htmlFor="name-3">Hora de entrada</label>
+                <label htmlFor="name-3">{t("Entrytime")}</label>
                 <input
                   className="new-visit-form w-input"
                   name="name-2"
@@ -106,16 +108,16 @@ const AddVisit: React.FC = () => {
                 />
               </div>
               <div className="div-form-visit _1">
-                <label htmlFor="field">Visita frecuente</label>
+                <label htmlFor="field">{t("FreqVis")}</label>
                 <select
                   name="frequent"
                   data-name="Field"
                   className="select-field w-select"
                   onChange={(e) => setFrequent(e.target.value)}
                 >
-                  <option value="no especificado">Select one...</option>
-                  <option value="si">Si</option>
-                  <option value="no">No</option>
+                  <option value="no especificado">{t("Select")}</option>
+                  <option value="si">{t("Y")}</option>
+                  <option value="no">{t("N")}</option>
                 </select>
               </div>
             </div>
@@ -127,10 +129,10 @@ const AddVisit: React.FC = () => {
             />
           </form>
           <div className="w-form-done">
-            <div>Thank you! Your submission has been received!</div>
+            <div>{t("SuccesM")}</div>
           </div>
           <div className="w-form-fail">
-            <div>Oops! Something went wrong while submitting the form.</div>
+            <div>{t("FailM")}</div>
           </div>
         </div>
       </div>

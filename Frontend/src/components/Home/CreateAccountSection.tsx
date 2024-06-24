@@ -1,6 +1,8 @@
 import React, { useState } from "react";
+import { useTranslation } from "react-i18next";
 
 const CreateAccountSection: React.FC = () => {
+  const { t } = useTranslation();
   const [name, setName] = useState("");
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
@@ -34,12 +36,12 @@ const CreateAccountSection: React.FC = () => {
     <section id="create-account" className="create-account">
       <div className="contact-container">
         <h2 className="heading-4">
-          te gustaría unirte a la comunidad Traqpacker?
+          {t("MassageU")}
         </h2>
-        <p className="paragraph">crea una cuenta ya!!!!</p>
+        <p className="paragraph">{t("Create")}</p>
         <div className="w-form">
           <form id="email-form" name="email-form" onSubmit={handleSignup}>
-            <label htmlFor="name">Name</label>
+            <label htmlFor="name">{t("Name")}</label>
             <input
               className="text-field w-input"
               name="name"
@@ -49,7 +51,7 @@ const CreateAccountSection: React.FC = () => {
               onChange={(e) => setName(e.target.value)}
               id="name"
             />
-            <label htmlFor="email">Email Address</label>
+            <label htmlFor="email">{t("Email")}</label>
             <input
               className="text-field-2 w-input"
               name="email"
@@ -60,7 +62,7 @@ const CreateAccountSection: React.FC = () => {
               id="email"
               required
             />
-            <label htmlFor="email">Password</label>
+            <label htmlFor="email">{t("Password")}</label>
             <input
               className="text-field-2 w-input"
               name="password"
@@ -75,10 +77,10 @@ const CreateAccountSection: React.FC = () => {
           </form>
           {message && <p className="messageType">{message}</p>}
           <div className="w-form-done">
-            <div>Thank you! Your submission has been received!</div>
+            <div>{t("SuccesM")}</div>
           </div>
           <div className="w-form-fail">
-            <div>Oops! Something went wrong while submitting the form.</div>
+            <div>{t("FailM")}</div>
           </div>
         </div>
       </div>

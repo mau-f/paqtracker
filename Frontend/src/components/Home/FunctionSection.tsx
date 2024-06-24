@@ -8,7 +8,7 @@ const FunctionSection: React.FC = () => {
       <div className="function">
         <div className="function-text">
           <div className="context">{t("Security")}</div>
-          <h2 className="title-function">Registro de visitas</h2>
+          <h2 className="title-function">{t("VisitorRegistration")}</h2>
           <p className="function-description">
             {t("VisitorRegistrationDescription")}
           </p>
@@ -22,23 +22,19 @@ const FunctionSection: React.FC = () => {
           <img src="/images/phone_2.png" alt="phone2" className="image-14" />
         </div>
         <div className="function-text">
-          <div className="context">organización</div>
-          <h2 className="title-function">Registro de Paquetes</h2>
+          <div className="context">{t("Organization")}</div>
+          <h2 className="title-function">{t("PackageRegistration")}</h2>
           <p className="function-description">
-            Permite a los residentes registrar los paquetes que lleguen al
-            complejo de apartamentos o condominio de casas, proporcionando
-            detalles como el remitente y la fecha de entrega.
+            {t("PackageRegistrationDescription")}.
           </p>
         </div>
       </div>
       <div className="function">
         <div className="function-text">
-          <div className="context">información actualizada</div>
-          <h2 className="title-function">Notificaciones de Llegada</h2>
+          <div className="context">{t("UpdatedInformation")} </div>
+          <h2 className="title-function">{t("ArrivalNotifications")}</h2>
           <p className="function-description">
-            Notifica a los residentes cuando sus paquetes llegan al complejo o
-            cuando sus visitantes registrados ingresan, manteniéndolos
-            informados en tiempo real sobre las actividades en la comunidad.
+            {t("ArrivalNotificationsDescription")}.
           </p>
         </div>
         <div className="img-function">
@@ -56,25 +52,23 @@ const FunctionSection: React.FC = () => {
             alt="notificacion"
             className="img-skill"
           />
-          <h4 className="title-skill">Notificaciones de actividad</h4>
+          <h4 className="title-skill">{t("ActivityNotifications")}</h4>
           <p className="text-skill">
-            mantente informado constantemente de lo que sucede en tu comunidad
+           {t("ActivityNotificationsDescription")}
           </p>
         </div>
         <div className="skill">
           <img src="/images/reloj.png" alt="reloj" className="img-skill" />
-          <h4 className="title-skill">Agilizar la experiencia</h4>
+          <h4 className="title-skill">{t("SpeedUpExperience")}</h4>
           <p className="text-skill">
-            optimiza los tiempos de los usuarios al simplificar el proceso de
-            recepción de paquetes y registro de visitantes.
+          {t("SpeedUpExperienceDescription")}
           </p>
         </div>
         <div className="skill">
           <img src="/images/nivel.png" alt="nivel" className="img-skill" />
-          <h4 className="title-skill">Aumenta la seguridad</h4>
+          <h4 className="title-skill">{t("IncreaseSecurity")}</h4>
           <p className="text-skill">
-            contribuye a fortalecer la seguridad en el condominio mediante el
-            registro y seguimiento de visitantes y paquetes
+            {t("IncreaseSecurityDescription")}
           </p>
         </div>
       </div>

@@ -1,9 +1,11 @@
 import React from "react";
+import { useTranslation } from "react-i18next";
 
 const AddNotification: React.FC = () => {
+  const { t } = useTranslation();
   return (
     <div>
-      <div className="add-title">Nueva Notificación</div>
+      <div className="add-title">{t("NewNot")}</div>
       <div className="div-form-add">
         <div className="w-form">
           <form
@@ -15,7 +17,7 @@ const AddNotification: React.FC = () => {
           >
             <div className="div-block-10">
               <div className="div-form-visit">
-                <label htmlFor="name-3">Departamento</label>
+                <label htmlFor="name-3">{t("Dep")}</label>
                 <input
                   className="new-visit-form w-input"
                   name="name-2"
@@ -26,7 +28,7 @@ const AddNotification: React.FC = () => {
                 />
               </div>
               <div className="div-form-visit">
-                <label htmlFor="name-3">Asunto</label>
+                <label htmlFor="name-3">{t("Subject")}</label>
                 <input
                   className="new-visit-form w-input"
                   name="name-2"
@@ -38,7 +40,7 @@ const AddNotification: React.FC = () => {
               </div>
             </div>
             <div className="div-text">
-              <label htmlFor="name-3">Mensaje</label>
+              <label htmlFor="name-3">{t("Message")}</label>
               <textarea
                 id="message"
                 name="message"
@@ -56,10 +58,10 @@ const AddNotification: React.FC = () => {
             />
           </form>
           <div className="w-form-done">
-            <div>Thank you! Your submission has been received!</div>
+            <div>{t("SuccesM")}</div>
           </div>
           <div className="w-form-fail">
-            <div>Oops! Something went wrong while submitting the form.</div>
+            <div>{t("FailM")}</div>
           </div>
         </div>
       </div>
