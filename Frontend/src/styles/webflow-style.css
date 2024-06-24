@@ -1984,6 +1984,7 @@ textarea.w-select {
   text-decoration: none;
   display: inline-block;
   position: relative;
+  background-color: rgba(0, 0, 0, 0);
 }
 
 .w-nav-link.w--current {

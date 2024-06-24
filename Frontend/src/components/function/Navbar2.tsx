@@ -1,8 +1,15 @@
 import { Link } from "react-router-dom";
 import React, { MouseEvent } from "react";
 import { useAuth } from "../../auth/AuthProvider";
+import { useTranslation } from "react-i18next";
 
 const Navbar2: React.FC = () => {
+  const { t, i18n } = useTranslation();
+
+  const changeLanguage = (lng: string) => {
+    i18n.changeLanguage(lng);
+  };
+
   const auth = useAuth();
   async function handleSingOut(e: React.MouseEvent<HTMLAnchorElement>) {
     e.preventDefault();
@@ -35,6 +42,12 @@ const Navbar2: React.FC = () => {
           </a>
         </div>
         <nav className="nav-menu w-nav-menu">
+          <button className="w-nav-link" onClick={() => changeLanguage("en")}>
+            English
+          </button>
+          <button className="w-nav-link" onClick={() => changeLanguage("es")}>
+            Español
+          </button>
           <a href="#" className="w-nav-link">
             Help
           </a>

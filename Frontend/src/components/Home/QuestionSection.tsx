@@ -30,7 +30,7 @@ const QuestionSection: React.FC = () => {
         <div className="questions-text">
           <div className="context">{t("Questions")}</div>
           <h2 className="title-function">
-          {t("D1")}
+          {t("Q2")}
           </h2>
           <p className="function-description">
           {t("D2")}
