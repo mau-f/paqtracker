@@ -25,7 +25,7 @@ const resources = {
       SpeedUpExperienceDescription:
         "Optimize user time by simplifying the package reception and visitor registration process.",
       IncreaseSecurity: "Increase Security",
-      "IncreaseSecurity Description":
+      IncreaseSecurityDescription:
         "Helps strengthen security in the condominium through the registration and tracking of visitors and packages",
     },
   },
